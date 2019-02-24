@@ -1,14 +1,6 @@
 import React from 'react';
-import loginForm from './components/loginForm.jsx';
+import LoginForm from './components/LoginForm.jsx';
 
-class App extends React.Component {
-  constructor(props) {
-    super();
-  }
-
-  render() {
-    return <loginForm />
-  }
-}
+const App = () => <LoginForm />
 
 export default App;
