@@ -17,5 +17,27 @@ module.exports = {
     sourceType: 'module'
   },
   plugins: ['react', 'jest'],
-  rules: {}
+  rules: {
+    'prefer-destructuring': [
+      'error',
+      {
+        AssignmentExpression: {
+          array: false,
+          object: true
+        }
+      }
+    ]
+  }
 };
+
+// 'prefer-destructuring': [
+//   'error',
+//   {
+//     array: false,
+//     object: true
+//   },
+//   {
+//     enforceForRenamedProperties: false
+//   }
+// ],
+// allowSingleLine: true
