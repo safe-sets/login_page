@@ -23,12 +23,3 @@ const saltHash = userPassword => {
 
   return passwordData;
 };
-
-let myPassword = 'ALBERT';
-let salt = generateSalt(12);
-let hashedPassword = generateHash(myPassword, salt);
-// let saltedHashed = saltHash(hashedPassword);
-
-console.log(salt, 'this is the salt');
-console.log(hashedPassword, 'this is the haspedPassword');
-// console.log(saltedHashed, 'Salted the hash pw');
