@@ -23,3 +23,9 @@ const saltHash = userPassword => {
 
   return passwordData;
 };
+
+module.exports = {
+  generateSalt,
+  generateHash,
+  saltHash
+};
