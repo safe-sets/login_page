@@ -17,55 +17,6 @@ class LoginForm extends React.Component {
     });
   };
 
-  handleValidation = pw => {
-    const { username, password } = this.state;
-
-    if (password.length === 0 || username.length === 0) {
-      alert('Please enter a valid password');
-      return;
-    }
-
-    let matchedCase = new Array();
-    matchedCase.push('[$@$!%*#?&]'); // Special Charectors
-    matchedCase.push('[A-Z]'); // Uppercase Alpabates
-    matchedCase.push('[0-9]'); // Numbers
-    matchedCase.push('[a-z]'); // Lowercase Alphabets
-
-    let validChars = 0;
-    for (let i = 0; i < matchedCase.length; i++) {
-      if (new RegExp(matchedCase[i]).test(password)) {
-        validChars++;
-      }
-    }
-
-    let color = '';
-    let strength = '';
-    let error = 'Invalid password length';
-
-    switch (validChars) {
-      case 0:
-      case 1:
-      case 2:
-        this.setState({
-          strength: 'Very weak',
-          color: 'red'
-        });
-        break;
-      case 3:
-        this.setState({
-          strength: 'Medium',
-          color: 'Orange'
-        });
-        break;
-      case 4:
-        this.setState({
-          strength: 'Strong',
-          color: 'Green'
-        });
-        break;
-    }
-  };
-
   render() {
     return (
       <form>
@@ -89,6 +40,11 @@ class LoginForm extends React.Component {
               onChange={this.handleInput}
             />
           </label>
+        </div>
+        <div>
+          <span>Weak</span>
+          <span>Medium</span>
+          <span>Strong</span>
         </div>
         <button onClick={this.handleValidation}>Submit</button>
         <a href='#'>Sign up</a>
