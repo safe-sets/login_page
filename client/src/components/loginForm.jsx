@@ -7,36 +7,36 @@ class LoginForm extends React.Component {
       username: '',
       password: '',
       strength: '',
-      color: ''
+      color: '',
     };
   }
 
   handleInput = e => {
     this.setState({
-      [`${e.target.name}`]: e.target.value
+      [`${e.target.name}`]: e.target.value,
     });
   };
 
   render() {
     return (
       <form>
-        <div id='username-container'>
-          <label htmlFor='username' id='username'>
+        <div id="username-container">
+          <label htmlFor="username" id="username">
             <span>Username</span>
             <input
               onChange={this.handleInput}
-              type='text'
-              name='username'
-              placeholder='Enter username...'
+              type="text"
+              name="username"
+              placeholder="Enter username..."
             />
           </label>
         </div>
-        <div id='password-container'>
-          <label htmlFor='password' id='password'>
+        <div id="password-container">
+          <label htmlFor="password" id="password">
             <span>Password</span>
             <input
-              type='password'
-              name='password'
+              type="password"
+              name="password"
               onChange={this.handleInput}
             />
           </label>
@@ -47,7 +47,7 @@ class LoginForm extends React.Component {
           <span>Strong</span>
         </div>
         <button onClick={this.handleValidation}>Submit</button>
-        <a href='#'>Sign up</a>
+        <a href="#">Sign up</a>
       </form>
     );
   }
