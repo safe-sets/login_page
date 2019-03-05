@@ -9,6 +9,7 @@
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-es2015": "^7.0.0-beta.53",
     "@babel/preset-react": "^7.0.0",
+    "axios": "^0.18.0",
     "babel-loader": "^8.0.5",
     "bcrypt": "^3.0.4",
     "cors": "^2.8.5",
@@ -17,7 +18,8 @@
     "mongoose": "^5.4.16",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
-    "redux": "^4.0.1"
+    "redux": "^4.0.1",
+    "request": "^2.88.0"
   },
   "devDependencies": {
     "body-parser": "^1.18.3",
@@ -36,6 +38,8 @@
   },
   "scripts": {
     "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage --colors",
     "react": "webpack -d --watch",
     "build": "webpack --mode production",
     "server": "nodemon server/server.js"
