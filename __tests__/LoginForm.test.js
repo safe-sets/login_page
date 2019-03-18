@@ -1,7 +1,11 @@
 import React from 'react';
 import LoginForm from '../client/src/components/LoginForm.jsx';
 import { shallow } from 'enzyme';
-import { generateSalt, generateHash } from '../db/utilities/dbUtilities.js';
+import {
+  generateSalt,
+  generateHash,
+  saltHash,
+} from '../db/utilities/dbUtilities.js';
 
 describe('LoginForm', () => {
   it('Should render on the page', () => {
@@ -19,10 +23,13 @@ describe('LoginForm', () => {
     expect(regExp.test('L33TH4X0R!!11!')).toBe(false);
   });
 
-  it("Should allow user's to register", () => {});
-
   it("Should hash the user's password", () => {
-    const passwords = ['sunshine', 'abc123', 'password', 'admin'];
+    let passwords = ['sunshine', 'abc123', 'password', 'admin'];
+    let salts = passwords.map(pw => generateSalt(pw));
+    let hashedPasswords = passwords.map((pw, index) => {
+      return generateHash(pw, salts[index]);
+    });
+
     //Salts for each of the above passwords
   });
 });

@@ -7,3 +7,10 @@ describe('GET / ', async () => {
     expect(response.body).toEqual('Hello World!');
   });
 })
+
+describe('POST', async () => {
+  it('Should receive a successful response upon post', () => {
+    const response = await request(app.post('/login'));
+    expect(response.status).toBe(200);
+  })
+})
