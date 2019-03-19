@@ -3,7 +3,11 @@ const app = express();
 const morgan = require('morgan');
 const bodyparser = require('body-parser');
 const cors = require('cors');
-const Users = require('../db/models/Users.js');
+const { Users } = require('../db/models/Users.js');
+const {
+  generateSalt,
+  generateHash,
+} = require('../db/utilities/dbUtilities.js');
 
 app
   .use('/', express.static('public'))
@@ -15,39 +19,36 @@ app
 app.get('/', (req, res) => res.send('Hello World!'));
 
 // If user is already registered, fetch their info from db for validation
-app.get('/userLogin', (req, res) => {
-  const { userName } = req.body;
+// app.get('/userLogin', (req, res) => {
+//   const { userName } = req.body;
 
-  Users.findOne({ username: `${userName}` }, (err, response) => {
-    if (err) {
-      res.status(503).send();
-    } else {
-      //TODO: Verify that the model gets returned back
-    }
-  });
-});
+//   Users.findOne({ username: `${userName}` }, (err, response) => {
+//     if (err) {
+//       res.status(503).send();
+//     } else {
+//       //TODO: Verify that the model gets returned back
+//     }
+//   });
+// });
 
-//If user is not registered, post their info into DB for validation
-app.post('/registration', (req, res) => {
-  const { username, password } = req.body;
+// If user is not registered, post their info into DB for validation
+app.post('/register', (req, res) => {
+  const { email, fullName, username, password } = req.body;
+  let salt = generateSalt(password.length);
+  let hash = generateHash(password, salt);
+
   if (!username && !password) {
-    res.send('Requires both form fields to be filled out');
+    res.status(418).send('Requires a password/username to register');
   }
 
-  //TODO
-  if (!username) {
-    let missingVal = !userName ? 'password' : 'username';
-    res.status(418).send(`Error, requires a ${missingVal}`);
-  }
-
-  if (!password) {
-    res.status(418).send('Error, requires a valid password');
-  }
-
-  if (username && password) {
-    const User = new Users(user); //TODO: double check on this
-    User.setPassword(password);
-  }
+  let newUser = new Users({
+    fullName,
+    userName: username,
+    email,
+    password,
+    hash,
+    salt,
+  });
 });
 
 module.exports = {
