@@ -2,7 +2,7 @@ const crypto = require('crypto');
 
 const generateSalt = length => {
   return crypto
-    .randomBytes(Math.ceil(length / 2))
+    .randomBytes(Math.ceil(length))
     .toString('hex')
     .slice(0, length);
 };
@@ -13,7 +13,7 @@ const generateHash = (password, salt) => {
   let value = hash.digest('hex');
   return {
     salt: salt,
-    passwordHash: value
+    passwordHash: value,
   };
 };
 
@@ -27,5 +27,5 @@ const saltHash = userPassword => {
 module.exports = {
   generateSalt,
   generateHash,
-  saltHash
+  saltHash,
 };
